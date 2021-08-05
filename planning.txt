@@ -1,0 +1,40 @@
+Book My show Clone
+
+Hero Carausel
+
+common Carausel
+
+cast and crew small Carausel
+
+Pages
+
+Home Page
+Movie Page
+Category Page
+Auth Page
+Razorpay  Page
+
+
+Plan  ---->
+
+1. Layouts
+2. Routes
+3. Pages
+4. Components
+
+HOC --> Higher Order Component
+
+HOC Returns a component instead of jsx object
+
+that can be either in class OR function 
+
+Layout Firsst Approach 
+
+Example : only contents in the page would be updated and navbar and footer will
+remain the same 
+
+Roting System in React 
+
+
+
+//How spreadd operator works
