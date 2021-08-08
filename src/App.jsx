@@ -13,7 +13,7 @@ function Name2(){
 const App=()=>(
   <>
     <div className="App">
-     <Route path="/" exact component={Name} />
+     {/*<Route path="/" exact component={Name} />*/}
     <Route path ="/name2" exact  component={Name2}/>
       <DefaultHOC path="/" exact component={Temp} />
     </div>
