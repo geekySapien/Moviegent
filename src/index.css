@@ -11,3 +11,7 @@
     right: 3% !important;
     z-index: 1;
 }
+
+::selection{
+    background: "bms-600";
+}
