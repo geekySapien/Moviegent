@@ -7,6 +7,7 @@ import "slick-carousel/slick/slick-theme.css";
 
 const HeroCarousel = () => {
     const settingsLg={
+        dots:true,
         arrows:true,
         autoplay:true,
         centerMode:true,
@@ -29,12 +30,12 @@ const HeroCarousel = () => {
     "https://images.unsplash.com/photo-1586227740560-8cf2732c1531?ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHw0OXx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"];
     return (
         <>
-            <div className="lg:hidden">
+            <div className="lg:hidden overflow-x-hidden">
                 <HeroSlider {...settings}>
                     {
                         images.map((image)=>(
-                            <div className="h-44 w-full py-3 md:h-64">
-                                <img src={image} alt="testing" className="h-full w-full" />
+                            <div className="h-56 w-full py-3 md:h-80">
+                                <img src={image} alt="testing" className="h-full w-full " />
                             </div>
                         ))
                     }
@@ -44,8 +45,8 @@ const HeroCarousel = () => {
                     <HeroSlider {...settingsLg}>
                         {
                             images.map((image)=>(
-                                <div className="w-20 h-80 px-2 py-3">
-                                    <img src={image} alt="testing" className="w-full h-full" />
+                                <div className="w-full h-96 px-2 py-3">
+                                    <img src={image} alt="testing" className="w-full h-full rounded-md" />
                                 </div>
                             ))
                         }
