@@ -56,6 +56,7 @@ const EntertainmentCardSlider=()=>{
     }
     return (
         <>
+        
         <Slider {...settings}>
             {
                 images.map((image)=>(
@@ -63,6 +64,7 @@ const EntertainmentCardSlider=()=>{
                 ))
             }
         </Slider>
+        
         </>
     )
 }
