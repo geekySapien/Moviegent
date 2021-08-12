@@ -55,7 +55,7 @@ const MovieNavbar=()=>{
            <div className="md:hidden">
                 <NavSm/>
            </div>
-           <div className="hidden md:flex lg:hidden">
+           <div className="hidden md:block lg:hidden">
                 <NavSm/>
            </div>
            <div className="hidden lg:flex">

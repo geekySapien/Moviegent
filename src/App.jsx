@@ -28,7 +28,7 @@ const App=()=>(
      {/*<Route path="/" exact component={Name} />*/}
     {/*Route path ="/name2" exact  component={Name2}/>*/}
      { <DefaultHOC path="/" exact component={HomePage} />}
-     <MovieHOC path="/movie/:id" exact component={MoviePage}/>;
+     <MovieHOC path="/movie/:id" exact component={MoviePage}/>
     </div>
   </>
 
