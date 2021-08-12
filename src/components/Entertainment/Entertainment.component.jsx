@@ -39,7 +39,7 @@ const EntertainmentCardSlider=()=>{
         {
             breakpoint:600,
             settings:{
-                slidesToShow:2,
+                slidesToShow:3,
                 slidesToScroll:1,
                 initialSlide:1,
             }
@@ -47,7 +47,7 @@ const EntertainmentCardSlider=()=>{
         {
             breakpoints:480,
             settings:{
-                slidesToShow:2,
+                slidesToShow:3,
                 slidesToScroll:1,
                
             }

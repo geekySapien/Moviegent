@@ -1,14 +1,15 @@
 import React from 'react'
 
+
 //component
-import Navbar from '../components/Navabr/navbar.component';
+import MovieNavbar from '../components/Navabr/movieNavbar.component'
 
 
 
 const MovieLayout = (props) => {
     return (
         <>
-          <Navbar/> 
+          <MovieNavbar/> 
           {props.children} 
         </>
     )
