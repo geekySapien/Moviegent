@@ -27,6 +27,7 @@ const PosterSlider=(props)=>{
                ))
             }
         </Slider>
+        
         </>
     )
 };
