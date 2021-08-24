@@ -6,8 +6,48 @@ import {FaCcVisa,FaCcApplePay} from 'react-icons/fa'
 //component
 import MovieHero from '../components/MovieHero/MovieHero.component'
 import Cast from '../components/Cast/Cast.component'
+import PosterSlider from '../components/PosterSlider/PosterSlider';
+
+
+//config
+import TempImages from '../config/TempPoster.config';
 
 const Movie = () => {
+    const settings={
+        arrow:true,
+        autoplay:false,
+        infinte:false,
+        slidesToShow:4,
+        slidesToScroll:2,
+        initialSlide:0,
+        responsive:[{
+            breakpoint:1024,
+            settings:{
+                slidesToShow:3,
+                slidesToScroll:2,
+                infinte:true
+            }
+        },
+        {
+            breakpoint:600,
+            settings:{
+                slidesToShow:3,
+                slidesToScroll:1,
+                initialSlide:1,
+            }
+        },
+        {
+            breakpoint:480,
+            settings:{
+                slidesToShow:3,
+                slidesToScroll:1,
+               
+            }
+        }
+    ]
+    }
+    
+    
     return (
         <>
         <MovieHero/>
@@ -46,6 +86,10 @@ const Movie = () => {
                     </div>
                 </div>
             </div>
+            
+            <div className="my-8">
+                <hr/>
+             </div>
             <div className="my-8">
                 <h2 className="text-xl font-bold text-gray-800">Cast and Crew</h2>
             </div>
@@ -57,7 +101,12 @@ const Movie = () => {
                 <Cast image="https://in.bmscdn.com/iedb/artist/images/website/poster/large/gal-gadot-11088-17-10-2017-11-45-36.jpg" castName="Gal Gadot" role="Wonder Woman"/>
                 
             </div>
-
+            <div className="my-8">
+                <PosterSlider config={settings }images={TempImages} title="You might also like" subtitle=""/>
+            </div>
+            <div className="my-8">
+                <PosterSlider config={settings }images={TempImages} title="BMS XCLUSIV" subtitle=""/>
+            </div>
         </div>
         </>
     )
