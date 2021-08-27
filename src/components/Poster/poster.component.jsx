@@ -8,7 +8,9 @@ const Poster= (props) => {
                 <img src={props.src} alt={props.title} className="w-full h-full rounded-md" />
             </div>
             <h3 className={`sm:text-sm md:text-md lg:text-lg font-bold ${props.isDark ? "text-white": "text-gray-700"}`}>{props.title}</h3>
-            <p className={`text-sm ${props.isDark ? "text-white" : "text-gray-800"}`}>{props.subtitle}</p>
+            <p className={`xs md:text-sm ${props.isDark ? "text-white" : "text-gray-800"}`}>{props.subtitle}</p>
+            <p className={`xs md:text-sm ${props.isDark ? "text-white" : "text-gray-800"}`}>{props.price}</p>
+            
           </div>
 
         </>
