@@ -10,17 +10,18 @@ const HeroCarousel = () => {
     const [images, setImages] = useState([]);
 
 
-    useEffect=(()=>{
-        const requestNowPlayingMovies=async()=>{
+   useEffect(() => {
+        const requestNowPlayingMovies = async() => {
             const getImages= await axios.get("/movie/now_playing");
             console.log(getImages);
             setImages(getImages.data.results)
         };
         requestNowPlayingMovies();
     }, []);
+    
     const settingsLg={
         arrows:true,
-        autoplay:true,
+        autoplay:false,
         centerMode:true,
         centerPadding:"300px",
         infinite: true,
@@ -31,7 +32,7 @@ const HeroCarousel = () => {
     };
     const settings={
     arrows:true, 
-    autoplay:true, 
+    autoplay:false, 
     infinite: true,
     speed: 500,
     slidesToShow: 1,
@@ -47,7 +48,7 @@ const HeroCarousel = () => {
                     {
                         images.map((image)=>(
                             <div className="h-56 w-full py-3 md:h-80">
-                                <img src={image} alt="testing" className="h-full w-full " />
+                                <img src={`https://www.themoviedb.org/t/p/original${image.backdrop_path}`} alt="testing" className="h-full w-full " />
                             </div>
                         ))
                     }
@@ -58,7 +59,7 @@ const HeroCarousel = () => {
                         {
                             images.map((image)=>(
                                 <div className="w-full h-96 px-2 py-3">
-                                    <img src={image} alt="testing" className="w-full h-full rounded-md" />
+                                    <img src={`https://www.themoviedb.org/t/p/original${image.backdrop_path}`} alt="testing" className="w-full h-full rounded-md" />
                                 </div>
                             ))
                         }
