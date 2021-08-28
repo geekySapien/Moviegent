@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
+import axios from "axios"
 import HeroSlider from "react-slick";
 
 //component
@@ -6,6 +7,17 @@ import HeroSlider from "react-slick";
 import { NextArrow, PrevArrow } from './Arrows.component';
 
 const HeroCarousel = () => {
+    const [images, setImages] = useState([]);
+
+
+    useEffect=(()=>{
+        const requestNowPlayingMovies=async()=>{
+            const getImages= await axios.get("/movie/now_playing");
+            console.log(getImages);
+            setImages(getImages.data.results)
+        };
+        requestNowPlayingMovies();
+    }, []);
     const settingsLg={
         arrows:true,
         autoplay:true,
@@ -27,11 +39,7 @@ const HeroCarousel = () => {
     nextArrow: <NextArrow/>,
     prevArrow: <PrevArrow/>
     };
-    const images=["https://images.unsplash.com/photo-1593642532744-d377ab507dc8?ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60", 
-    "https://images.unsplash.com/photo-1628417632477-5919c98218d5?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
-    "https://images.unsplash.com/photo-1628270680011-41792b21de87?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxNHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60", 
-    "https://images.unsplash.com/photo-1627662056598-dcfc5000f769?ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwyNXx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
-    "https://images.unsplash.com/photo-1586227740560-8cf2732c1531?ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHw0OXx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"];
+    
     return (
         <>
             <div className="lg:hidden ">
