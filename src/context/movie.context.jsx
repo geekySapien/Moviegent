@@ -1,8 +1,8 @@
 import React from "react";
 
-const MovieContext = React.createContext();
+export const MovieContext = React.createContext();
 
-export const MovieProvier = ({ children }) => {
+ const MovieProvier = ({ children }) => {
   const [movie, setMovie] = React.useState({
     id: 0,
     original_title: "",
