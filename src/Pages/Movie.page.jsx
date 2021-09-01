@@ -1,4 +1,8 @@
-import React from "react";
+import React, { useContext, useState, useEffect } from "react";
+
+import { useParams } from "react-router-dom";
+
+import axios from "axios";
 
 import { FaCcVisa, FaCcApplePay } from "react-icons/fa";
 
@@ -6,11 +10,31 @@ import { FaCcVisa, FaCcApplePay } from "react-icons/fa";
 import MovieHero from "../components/MovieHero/MovieHero.component";
 import Cast from "../components/Cast/Cast.component";
 import PosterSlider from "../components/PosterSlider/PosterSlider";
+import {NextArrow, PrevArrow} from "../components/HeroCarousel/Arrows.component"
+
+//context
+import { MovieContext } from "../context/movie.context";
 
 //config
 import TempImages from "../config/TempPoster.config";
 
+import Slider from "react-slick";
+
 const Movie = () => {
+  const { id } = useParams();
+  const { movie } = useContext(MovieContext);
+  const [cast, setCast] = useState([]);
+  useEffect(() => {
+    const requestCast = async () => {
+      const getCastData = await axios.get(`/movie/${id}/credits`);
+
+      setCast(getCastData.data.cast);
+      console.log(getCastData);
+    };
+
+    requestCast();
+  }, []);
+
   const settings = {
     arrow: true,
     autoplay: false,
@@ -45,17 +69,48 @@ const Movie = () => {
     ],
   };
 
+  const settingsCast = {
+    arrow: true,
+    autoplay: false,
+    infinte: false,
+    slidesToShow: 6,
+    slidesToScroll: 2,
+    initialSlide: 0,
+    
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 2,
+          infinte: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 5,
+          slidesToScroll: 1,
+          initialSlide: 1,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
+
   return (
     <>
       <MovieHero />
       <div className="my-12 container lg:ml-20 px-4 lg:w-2/3">
         <div className="flex flex-col items-start gap-3 ">
           <h2 className="text-gray-800 text-2xl font-bold">About the movie</h2>
-          <p className="">
-            Bruce Wayne and Diana Prince try to bring the metahumans of Earth
-            together after the death of Clark Kent. Meanwhile, Darkseid sends
-            Steppenwolf to Earth with an army to subjugate humans.
-          </p>
+          <p className="">{movie.overview}</p>
         </div>
         <div className="my-8">
           <hr />
@@ -99,25 +154,16 @@ const Movie = () => {
         <div className="my-8">
           <h2 className="text-xl font-bold text-gray-800">Cast and Crew</h2>
         </div>
-        <div className="flex flex-wrap gap-4">
-          <Cast
-            image="https://in.bmscdn.com/iedb/artist/images/website/poster/large/ben-affleck-292-12-09-2017-05-12-16.jpg"
-            castName="Ben Alfeck"
-            role="Batman"
-          />
+        <Slider {...settingsCast}>
+          {cast.map((getCastData) => (
+            <Cast
+              image={`https://www.themoviedb.org/t/p/original/${getCastData.profile_path}`}
+              castName={getCastData.original_name}
+              role={getCastData.character}
+            />
+          ))}
+        </Slider>
 
-          <Cast
-            image="https://in.bmscdn.com/iedb/artist/images/website/poster/large/henry-cavill-23964-04-05-2020-04-25-14.jpg"
-            castName="Henry Cavil"
-            role="Superman"
-          />
-
-          <Cast
-            image="https://in.bmscdn.com/iedb/artist/images/website/poster/large/gal-gadot-11088-17-10-2017-11-45-36.jpg"
-            castName="Gal Gadot"
-            role="Wonder Woman"
-          />
-        </div>
         <div className="my-8">
           <PosterSlider
             config={settings}
