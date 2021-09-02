@@ -28,7 +28,7 @@ const MovieInfo = () => {
           <div className="font-light flex flex-col gap-2 md:px-4">
             <div className="text-white text-sm">
               4K &bull; {movie.original_language} &bull;
-              <span className="text-red-500 font-bold">Subtitles(1)</span>
+              <span className="text-red-500 font-bold"> Subtitles(1)</span>
             </div>
             <div className="text-white text-sm ">
               {(movie.runtime/60).toFixed(2)} h &bull; {genres}

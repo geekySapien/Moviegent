@@ -10,7 +10,10 @@ import { FaCcVisa, FaCcApplePay } from "react-icons/fa";
 import MovieHero from "../components/MovieHero/MovieHero.component";
 import Cast from "../components/Cast/Cast.component";
 import PosterSlider from "../components/PosterSlider/PosterSlider";
-import {NextArrow, PrevArrow} from "../components/HeroCarousel/Arrows.component"
+import {
+  NextArrow,
+  PrevArrow,
+} from "../components/HeroCarousel/Arrows.component";
 
 //context
 import { MovieContext } from "../context/movie.context";
@@ -24,16 +27,37 @@ const Movie = () => {
   const { id } = useParams();
   const { movie } = useContext(MovieContext);
   const [cast, setCast] = useState([]);
+  const [similarMovies, setSimilarMovies] = useState([]);
+  const [recommendedMovies, setRecommendedMovies] = useState([]);
   useEffect(() => {
     const requestCast = async () => {
       const getCastData = await axios.get(`/movie/${id}/credits`);
-
       setCast(getCastData.data.cast);
-      console.log(getCastData);
+    };
+    requestCast();
+  },[id]);
+
+  useEffect(() => {
+    const requestSimilarMovies = async () => {
+      const getSimilarMovies = await axios.get(`/movie/${id}/similar`);
+
+      setSimilarMovies(getSimilarMovies.data.results);
+      //console.log(getCastData);
     };
 
-    requestCast();
-  }, []);
+    requestSimilarMovies();
+  }, [id]);
+
+  useEffect(() => {
+    const requestRecommendedMovies = async () => {
+      const getRecommendedMovies = await axios.get(
+        `/movie/${id}/recommendations`
+      );
+      setRecommendedMovies(getRecommendedMovies.data.results);
+    };
+    requestRecommendedMovies();
+    //console.log(upcoming);
+  }, [id]);
 
   const settings = {
     arrow: true,
@@ -76,7 +100,7 @@ const Movie = () => {
     slidesToShow: 6,
     slidesToScroll: 2,
     initialSlide: 0,
-    
+
     responsive: [
       {
         breakpoint: 1024,
@@ -167,7 +191,7 @@ const Movie = () => {
         <div className="my-8">
           <PosterSlider
             config={settings}
-            images={TempImages}
+            images={recommendedMovies}
             title="You might also like"
             subtitle=""
           />
@@ -175,7 +199,7 @@ const Movie = () => {
         <div className="my-8">
           <PosterSlider
             config={settings}
-            images={TempImages}
+            images={similarMovies}
             title="BMS XCLUSIV"
             subtitle=""
           />

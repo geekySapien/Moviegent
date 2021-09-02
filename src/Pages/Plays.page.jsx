@@ -1,50 +1,56 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
+
+import { Link } from 'react-router-dom';
+import axios from "axios";
 
 //component
 
 import Poster from "../components/Poster/poster.component";
 import Filter from "../components/PlaysFilters/Filter.component";
 
-const Plays = () => {
+//context
+import { MovieContext } from "../context/movie.context";
+
+const Plays = (props) => {
+  const { movie } = useContext(MovieContext);
+  const [latest, setLatest] = useState([]);
+
+  useEffect(() => {
+    const requestLatest = async () => {
+      const getLatestData = await axios.get("/movie/now_playing");
+      console.log(getLatestData);
+      setLatest(getLatestData.data.results);
+    };
+    requestLatest();
+  }, []);
+
   return (
     <>
       <div className="container mx-auto px-4">
         <div className="w-full lg:flex lg:flex-row-reverse gap-10">
           <div className="w-full lg:w-3/4">
-            <h2 className="text-2xl font-bold mb-3">Plays in Ahmedabad</h2>
+            <h2 className="text-2xl font-bold mb-3">Trending in Ahmedabad</h2>
             <div className="flex flex-wrap ">
-              <div className=" w-1/3 lg: w-1/4 my-3">
-                <Poster
-                  src="https://in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:ote-RnJpLCAyNyBBdWc%3D,ots-29,otc-FFFFFF,oy-612,ox-24/et00314067-fkzlqeafca-portrait.jpg"
-                  title="Admission"
-                  subtitle="English "
-                  price="₹449"
-                />
-              </div>
-              <div className="w-1/3  lg: w-1/4 my-3">
-                <Poster
-                  src="https://in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:ote-RnJpLCAyNyBBdWc%3D,ots-29,otc-FFFFFF,oy-612,ox-24/et00314067-fkzlqeafca-portrait.jpg"
-                  title="Admission"
-                  subtitle="English "
-                  price="₹449"
-                />
-              </div>
-              <div className=" w-1/3 lg: w-1/4 my-3">
-                <Poster
-                  src="https://in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:ote-RnJpLCAyNyBBdWc%3D,ots-29,otc-FFFFFF,oy-612,ox-24/et00314067-fkzlqeafca-portrait.jpg"
-                  title="Admission"
-                  subtitle="English"
-                  price="₹449"
-                />
-              </div>
-              <div className=" w-1/3 lg: w-1/4 my-3">
-                <Poster
-                  src="https://in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:ote-RnJpLCAyNyBBdWc%3D,ots-29,otc-FFFFFF,oy-612,ox-24/et00314067-fkzlqeafca-portrait.jpg"
-                  title="Admission"
-                  subtitle="English"
-                  price="₹449"
-                />
-              </div>
+              {latest.map((latestImage) => (
+                <div className=" w-1/3 lg: w-1/4 my-3">
+                  <Link to={`/movie/${latestImage.id}`}>
+                  <div className="flex flex-col items-start gap-2 px-1 md:px-3 ">
+                    <div className=" h-40 md:h-80">
+                      <img
+                        src={`https://image.tmdb.org/t/p/original${latestImage.poster_path}`}
+                        alt={latestImage.original_title}
+                        className="w-full h-full rounded-md"
+                      />
+                    </div>
+                    <h3
+                      className={`sm:text-sm md:text-md lg:text-lg font-bold "text-gray-700" `}
+                    >
+                      {latestImage.original_title}
+                    </h3>
+                  </div>
+                  </Link>
+                </div>
+              ))}
             </div>
           </div>
 
